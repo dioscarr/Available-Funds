@@ -39,4 +39,12 @@ console.log(today);
 
 return  mm+'/'+dd+'/'+yyyy;
 }
-export {formatDate,getCurrentDate};
+
+const sum = (values) =>
+{
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    return values.reduce(reducer);
+}
+
+export {formatDate,getCurrentDate,sum};
+

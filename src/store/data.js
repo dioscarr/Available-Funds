@@ -1,5 +1,7 @@
+import {sum} from '../utility/utilities';
+
 const dataGroceryTodo =
-[{id:1, Name:'Eggs', Budget:3.80, Price:5.00},
+[{id:1, Name:'Eggs', Budget:20.80, Price:5.00},
 {id:2,Name:'Milk', Budget:3.70, Price:5.00},
 {id:3,Name:'Bread', Budget:1.10, Price:5.00},
 {id:4,Name:'Cheese', Budget:4.99, Price:5.00},
@@ -15,11 +17,32 @@ const AvailableFunds = [
   {id:4, Name:"Cash On Hand", Balance:180, BalanceDate:'12/02/2019'}
 ];
 
+const SummaryTotals =
+{
+  TotalBalance:0,
+  CurrentBudget:0
+}
+
 const dataCollections = {
   AvailableFunds:AvailableFunds ,
   dataGroceryTodo:dataGroceryTodo,
-  AvailableFunds_NextId:0};
+  AvailableFunds_NextId:0,
+  SummaryTotals:SummaryTotals
+};
 
-  dataCollections.AvailableFunds_NextId = dataCollections.AvailableFunds.length+1;
+dataCollections.AvailableFunds_NextId = dataCollections.AvailableFunds.length+1;
+dataCollections.SummaryTotals.ToalBalance = Update_TotalBalance(dataCollections);
+dataCollections.SummaryTotals.CurrentBudget = Update_CurrentBudget(dataCollections);
 
   export default dataCollections;
+
+
+  function Update_TotalBalance(state, ) {
+    state.SummaryTotals.TotalBalance = sum(state.AvailableFunds.map(item => parseInt(item.Balance)))
+      .toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function Update_CurrentBudget (state) {
+    return state.SummaryTotals.CurrentBudget = sum(state.dataGroceryTodo.map(item => parseFloat(item.Budget)))
+      .toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }

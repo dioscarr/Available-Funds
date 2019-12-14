@@ -57,14 +57,11 @@ function getInitialMode()
      return false;
   }
 }
-
 function getPreColorsScheme()
 {
   if(!window.matchMedia)return;
   return window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
-
-
 const [state, dispatch] = useReducer(dbReducer, dataCollections)
 return (
   <db.Provider value={{state, dispatch}} >
@@ -83,17 +80,19 @@ return (
             />
             <label htmlFor="checkbox" />
 
-          <span  style={!darkMode? {color:'black'} : {color:'Purple'}}>☽</span>
-          </span>
+            <span  style={!darkMode? {color:'black'} : {color:'Purple'}}>☽</span>
+            </span>
           </div>
 
           <span>Available Funds</span>
-           {darkMode? "Dark Mode" : "Light Mode"}
+          {darkMode? "Dark Mode" : "Light Mode"}
 
         </div>
       </div>
       <div id="item2">
         <ManageFunds/>
+      </div>
+      <div id="item1-2">
         <FundsSummary />
       </div>
       <div id="item3" className="CollectionOfAvailFunds">
