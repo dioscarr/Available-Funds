@@ -54,24 +54,27 @@ const FundTemplate = (props)=>{
 
     return(
         <div className="funditems">
-            <div className="fundLName">{itm.Name}</div>
+            <div className="fundLName">
+                {itm.Name}
+            </div>
             <div className="fundLBalance">
                 ${parseFloat(itm.Balance).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </div>
-            <div className="fundLBalanceDate">{itm.BalanceDate}</div>
+            <div className="fundLBalanceDate">
+                {itm.BalanceDate}
+            </div>
             <div className="fundIName">
                 <input type="text" name="Ibalance" onChange={setField} value={fields.Ibalance}/>
-            </div><div className="btnfundUpdate">
-
+            </div>
+            <div className="btnfundUpdate">
                 <Fab onClick={SendUpdate} color="primary" aria-label="edit">
                 <FaCheck style={{fontSize:'30px'}} />
                 </Fab>
             </div>
             <div className="btnFundRemove">
-
-            <Fab onClick={Delete} color="primary"  aria-label="edit">
-                <MdDelete style={{fontSize:'30px'}} />
-            </Fab>
+                <Fab onClick={Delete} color="primary"  aria-label="edit">
+                    <MdDelete style={{fontSize:'30px'}} />
+                </Fab>
             </div>
             <div className="isActiveToggle">
                 <ToggleItem id={`toggleItem${itm.id}`} isActive={itm.isActive} callBack = {callback.bind(this)} />

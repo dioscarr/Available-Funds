@@ -25,7 +25,7 @@ const ManageFunds = (props)=>{
         <div>{(isBalanceValid())?"Valid":"Not Valid"}</div>
         {/* <button type="button" onClick={Add}>Add New Fund</button> */}
         <Fab onClick={Add} color="primary" aria-label="add">
-                    <IoIosAdd />
+                    <IoIosAdd style={{fontSize:'55px',fontWeight:'900'}} />
                 </Fab>
       </div>
     );
