@@ -9,7 +9,7 @@ const FundsView = (props)=>
         props.DispatchUpdateFund(model);
     }
   return(
-    props.funds.map(fundItem => <FundTemplate key={fundItem.id} funditem = {fundItem} funcFundUpdate={funcFundUpdate.bind(this)} />)
+    props.funds.sort((a, b) => (a.id > b.id) ? 1 : -1).map(fundItem => <FundTemplate key={fundItem.id} funditem = {fundItem} funcFundUpdate={funcFundUpdate.bind(this)} />)
   )
 }
 //settings

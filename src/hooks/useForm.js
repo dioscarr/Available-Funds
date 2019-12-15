@@ -6,14 +6,28 @@ import {getCurrentDate} from '../utility/utilities';
 *
 * **/
 export function useForm(initState) {
+
   const [fields, setFields] = useState(initState);
-  const setField = (e) => {setFields({ ...fields, [e.target.name]: e.target.value });}
-  const reset = ()=>setFields({Name:"",Balance:""});
-  const isBalanceValid = ()=>{return (isNaN(fields.Balance))?false:true}
-  const model = ()=>{
-    debugger;
-    let model = {id:fields.id, Name:fields.Name, Balance:fields.Ibalance, BalanceDate:getCurrentDate()}
-    return model;
+
+  const setField = (e) => {
+
+    const propertyName = (typeof e.target !='undefined')? e.target.name: e.Name;
+    const propertyValue = (typeof e.target !='undefined')? e.target.value: e.Value;
+    setFields({ ...fields,[propertyName]:propertyValue });
   }
-  return [fields,setField,reset,isBalanceValid,model]
+  const reset = ()=>setFields({ id:fields.id, Name:fields.Name,Iname:'', Balance:fields.Balance, Ibalance:'', BalanceDate:fields.getCurrentDate});
+  const isBalanceValid = ()=>{return (isNaN(fields.Ibalance))?false:true}
+
+  const GetUpdatedBalance = (Balance)=>
+  {
+    let tempBalance = fields.Ibalance;
+    if(fields.Ibalance.indexOf("+")>-1){
+      tempBalance =parseFloat(Balance) + parseFloat(fields.Ibalance)
+    }
+    else if(fields.Ibalance.indexOf("-")>-1){
+      tempBalance = parseFloat(Balance) + parseFloat(fields.Ibalance)
+    }
+    return  tempBalance;
+  }
+  return {fields,setFields,setField,reset,isBalanceValid,GetUpdatedBalance}
 }

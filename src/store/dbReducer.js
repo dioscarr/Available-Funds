@@ -4,25 +4,37 @@ import {sum} from '../utility/utilities';
   {
     switch(action.type)
     {
+      case 'UPDATETOTALS':
+          Update_CurrentBudget(state);
+          Update_TotalBalance(state);
+        return {...state}
       case 'ADD':
-          debugger;
+
             let new_model = action.payload.model;
             new_model.id = state.AvailableFunds_NextId;
             state.AvailableFunds.push(new_model);
+
+            Update_CurrentBudget(state);
+            Update_TotalBalance(state);
+
             return{...state,AvailableFunds_NextId:new_model.id+1}
         case 'UPDATE':
-          debugger;
+
             let updated_model = action.payload;
+
             let newAvailableFunds = state.AvailableFunds.filter((item) =>{
                return item.id !== updated_model.id
             });
+
             newAvailableFunds.push(updated_model);
             const newstate = {...state,AvailableFunds:newAvailableFunds};
+
             Update_CurrentBudget(newstate);
             Update_TotalBalance(newstate);
+
             return newstate;
         case 'DELETE':
-              debugger;
+
               state.AvailableFunds = state.AvailableFunds.filter(item=>item.id!==action.payload.id);
               Update_CurrentBudget(state);
               Update_TotalBalance(state);
@@ -39,8 +51,13 @@ import {sum} from '../utility/utilities';
 
 
 function Update_TotalBalance(state) {
-  state.SummaryTotals.TotalBalance = sum(state.AvailableFunds.map(item => parseInt(item.Balance)))
-    .toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  state.SummaryTotals.TotalBalance = (state.AvailableFunds.filter(item=>{return item.isActive === true}).length>0)
+                                    ?sum(state.AvailableFunds
+                                    .filter(item=>{return item.isActive === true})
+                                    .map(item => parseInt(item.Balance)))
+                                    .toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    :0;
 }
 
 function Update_CurrentBudget (state) {

@@ -11,10 +11,10 @@ const dataGroceryTodo =
 {id:8,Name:'Beans', Budget:.99, Price:5.00}];
 
 const AvailableFunds = [
-  {id:1, Name:"Gift Card", Balance:352, BalanceDate:'12/02/2019'},
-  {id:2, Name:"Cash Savings", Balance:840, BalanceDate:'12/02/2019'},
-  {id:3, Name:"Bacnk Acct", Balance:542, BalanceDate:'12/02/2019'},
-  {id:4, Name:"Cash On Hand", Balance:180, BalanceDate:'12/02/2019'}
+  {id:1, Name:"Gift Card", Balance:352, BalanceDate:'12/02/2019', isActive:true}
+   ,{id:2, Name:"Cash Savings", Balance:840, BalanceDate:'12/02/2019', isActive:true}
+   ,{id:3, Name:"Bacnk Acct", Balance:542, BalanceDate:'12/02/2019', isActive:true}
+   ,{id:4, Name:"Cash On Hand", Balance:180, BalanceDate:'12/02/2019', isActive:true}
 ];
 
 const SummaryTotals =
@@ -31,15 +31,23 @@ const dataCollections = {
 };
 
 dataCollections.AvailableFunds_NextId = dataCollections.AvailableFunds.length+1;
-dataCollections.SummaryTotals.ToalBalance = Update_TotalBalance(dataCollections);
+debugger;
+dataCollections.SummaryTotals.TotalBalance = Update_TotalBalance(dataCollections);
 dataCollections.SummaryTotals.CurrentBudget = Update_CurrentBudget(dataCollections);
 
   export default dataCollections;
 
 
-  function Update_TotalBalance(state, ) {
-    state.SummaryTotals.TotalBalance = sum(state.AvailableFunds.map(item => parseInt(item.Balance)))
-      .toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  function Update_TotalBalance(state) {
+    debugger;
+    state.SummaryTotals.TotalBalance = (state.AvailableFunds.filter(item=>{return item.isActive === true}).length>0)
+                                        ?sum(state.AvailableFunds
+                                        .filter(item=>{return item.isActive === true})
+                                        .map(item => parseInt(item.Balance)))
+                                        .toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                        : 0;
+
+
   }
 
   function Update_CurrentBudget (state) {

@@ -1,40 +1,57 @@
-import React, { useState, useContext } from 'react';
+import React, {useContext } from 'react';
 import {db} from '../store/storeSettings';
 import { useForm } from './../hooks/useForm';
+import ToggleItem from './ToggleItem';
+
+import {Fab} from '@material-ui/core';
+import { FaCheck } from 'react-icons/fa';
+import {MdDelete} from 'react-icons/md'
+
+
+
 
 const FundTemplate = (props)=>{
-
     const itm = props.funditem;
     const {dispatch} = useContext(db);
-    const [fields,
-            onFieldChange,
-            reset,
-            isBalanceValid,
-            model
-            ] = useForm({
-                id:itm.id,
-                Name:itm.Name,
-                Balance:itm.Balance,
-                Ibalance:"",
-                BalanceDate:itm.BalanceDate});
+    const {fields,setFields, setField,GetUpdatedBalance} = useForm({ Ibalance:""});
+    function SendUpdate()
+    {
+        let updatedModel = {
+            id:itm.id,
+            Name:itm.Name,
+            Balance:GetUpdatedBalance(itm.Balance),
+            BalanceDate:itm.BalanceDate
+            ,isActive:itm.isActive
+        }
+        dispatch({type:'UPDATE',payload:updatedModel});
+        setFields({Ibalance:''});
+    }
+    function Delete()
+    {
+        let updatedModel = {
+            id:itm.id,
+            Name:itm.Name,
+            Balance:itm.Balance,
+            BalanceDate:itm.BalanceDate
+        }
+        dispatch({type:'DELETE', payload:updatedModel})
+        //setFields({Ibalance:''});
+    }
+    function callback(props)
+    {
 
-    //const {funcFundUpdate} = props;
+        const {isActive} = props;
+        let updatedModel = {
+            id:itm.id,
+            Name:itm.Name,
+            Balance:itm.Balance,
+            BalanceDate:itm.BalanceDate
+            ,isActive:isActive
+        }
+        dispatch({type:'UPDATE',payload:updatedModel});
+        setFields({Ibalance:''});
+    }
 
-
-
-    //const [IBalance, setIBalance] = useState("");
-
-    //const onIbalanceChange = e => {
-      //  const {value} = e.target;
-    //    setIBalance(value);
-   // }
-    //const updateBalance = e =>
-   // {
-        //funditem.Balance = IBalance;
-        //funcFundUpdate({model:funditem});
-        //setIBalance("");
-    //}
-debugger;
     return(
         <div className="funditems">
             <div className="fundLName">{itm.Name}</div>
@@ -43,24 +60,21 @@ debugger;
             </div>
             <div className="fundLBalanceDate">{itm.BalanceDate}</div>
             <div className="fundIName">
-                <input type="text" name="Ibalance"
-                    onChange={onFieldChange}
-                    value={fields.Ibalance}/>
-            </div>
-            <div className="btnfundUpdate">
-                <button onClick={e=>{
-                    debugger;
-                    dispatch({type:'UPDATE',payload:model()});
-                    reset();
-                }} type="button">update</button>
+                <input type="text" name="Ibalance" onChange={setField} value={fields.Ibalance}/>
+            </div><div className="btnfundUpdate">
+
+                <Fab onClick={SendUpdate} color="primary" aria-label="edit">
+                <FaCheck style={{fontSize:'30px'}} />
+                </Fab>
             </div>
             <div className="btnFundRemove">
-                <button type="button"
-                onClick={e=>{
-                    debugger;
-                    dispatch({type:'DELETE', payload:model()});
-                    reset();
-                }}>Remove</button>
+
+            <Fab onClick={Delete} color="primary"  aria-label="edit">
+                <MdDelete style={{fontSize:'30px'}} />
+            </Fab>
+            </div>
+            <div className="isActiveToggle">
+                <ToggleItem id={`toggleItem${itm.id}`} isActive={itm.isActive} callBack = {callback.bind(this)} />
             </div>
         </div>
     );
