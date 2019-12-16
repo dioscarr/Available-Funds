@@ -1,11 +1,12 @@
 import React, {useState, useReducer, useContext, useEffect} from 'react';
 import ManageFunds from './components/ManageFunds';
-import './App.css';
+import './App.scss';
 import {db} from './store/storeSettings';
 import dataCollections from './store/data';
 import dbReducer from './store/dbReducer';
 import FundsView from './components/FundsView';
 import FundsSummary from './components/FundsSummary'
+import ToolsBar from './components/ToolsBar';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   useEffect(()=>{
     console.log("render");
     localStorage.setItem('dark', JSON.stringify(darkMode));
+    dispatch({type:'THEMEMODE',payload:{mode:darkMode}});
   },[darkMode]);
 
   useEffect(()=>{
@@ -41,11 +43,13 @@ function App() {
     if(!window.matchMedia)return;
       return window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
+ 
+  
   return (
     <db.Provider value={{state, dispatch}} >
       <div id="todoGridParent" className={darkMode? "Dark-Mode" : "Light-Mode"}>
-        <div id="item1">
-          <div className="App_Title">
+        <div data-theme={state.dataTheme.theme} id="HeaderRoot">
+          <div data-theme={state.dataTheme.theme} className="App_Title" >
 
             <span>Available Funds</span>
 
@@ -55,7 +59,7 @@ function App() {
               <span className="toggle">
               <input
                 checked={darkMode}
-                onChange={()=>setDarMode(prevState=>!prevState)}
+                onChange={()=>{setDarMode(prevState=>!prevState);}}
                 type="checkbox"
                 className="checkbox"
                 id="checkbox"
@@ -67,13 +71,16 @@ function App() {
             </div>
         </div>
 
-        <div id="item1-2">
+        <div data-theme={state.dataTheme.theme} id="FundsSummaryRoot">
           <FundsSummary />
         </div>
-        <div id="item2">
+        <div data-theme={state.dataTheme.theme} id="ManageFundsRoot">
           <ManageFunds/>
         </div>
-        <div id="item3" className="CollectionOfAvailFunds">
+        <div id="ToolsBarRoot">
+          <ToolsBar />
+        </div>
+        <div data-theme={state.dataTheme.theme} id="FundsView" className="CollectionOfAvailFunds">
         <FundsView />
         </div>
       {/* <div id="item4">

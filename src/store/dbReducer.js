@@ -4,6 +4,10 @@ import {sum} from '../utility/utilities';
   {
     switch(action.type)
     {
+      case 'THEMEMODE':
+        const theme =  (action.payload.mode)?state.dataTheme.dark:state.dataTheme.light;
+        state.dataTheme.theme=theme;
+        return {...state}
       case 'UPDATETOTALS':
           Update_CurrentBudget(state);
           Update_TotalBalance(state);

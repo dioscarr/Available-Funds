@@ -1,5 +1,13 @@
 import {sum} from '../utility/utilities';
 
+const dataTheme = {
+  light:''
+  ,dark:'dark'
+  ,theme:''
+
+  
+}
+
 const dataGroceryTodo =
 [{id:1, Name:'Eggs', Budget:20.80, Price:5.00},
 {id:2,Name:'Milk', Budget:3.70, Price:5.00},
@@ -24,10 +32,11 @@ const SummaryTotals =
 }
 
 const dataCollections = {
-  AvailableFunds:AvailableFunds ,
-  dataGroceryTodo:dataGroceryTodo,
-  AvailableFunds_NextId:0,
-  SummaryTotals:SummaryTotals
+  dataTheme:dataTheme
+  ,AvailableFunds:AvailableFunds 
+  ,dataGroceryTodo:dataGroceryTodo
+  ,AvailableFunds_NextId:0
+  ,SummaryTotals:SummaryTotals
 };
 
 dataCollections.AvailableFunds_NextId = dataCollections.AvailableFunds.length+1;

@@ -22,11 +22,10 @@ const ManageFunds = (props)=>{
         <input type="text" name="Iname" onChange={setField}  value={fields.Iname} />
         <div>$ Balance</div>
         <input type="text" name="Ibalance" onChange={setField}  value={fields.Ibalance} />
-        <div>{(isBalanceValid())?"Valid":"Not Valid"}</div>
-        {/* <button type="button" onClick={Add}>Add New Fund</button> */}
+        <div>{(isBalanceValid())?"Valid":"Not Valid"}</div>        
         <Fab onClick={Add} color="primary" aria-label="add">
-                    <IoIosAdd style={{fontSize:'55px',fontWeight:'900'}} />
-                </Fab>
+          <IoIosAdd style={{fontSize:'55px',fontWeight:'900'}} />
+        </Fab>
       </div>
     );
   }
