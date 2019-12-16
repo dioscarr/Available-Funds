@@ -66,11 +66,12 @@ function App() {
               </span>
             </div>
         </div>
-        <div id="item2">
-          <ManageFunds/>
-        </div>
+
         <div id="item1-2">
           <FundsSummary />
+        </div>
+        <div id="item2">
+          <ManageFunds/>
         </div>
         <div id="item3" className="CollectionOfAvailFunds">
         <FundsView />
