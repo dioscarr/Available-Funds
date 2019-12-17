@@ -4,6 +4,10 @@ import {sum} from '../utility/utilities';
   {
     switch(action.type)
     {
+      case 'UPDATEACTSTHEME':
+            const selectedTheme = action.payload.theme;
+            state.dataTheme.acts_theme = selectedTheme;
+        return {...state}
       case 'THEMEMODE':
         const theme =  (action.payload.mode)?state.dataTheme.dark:state.dataTheme.light;
         state.dataTheme.theme=theme;

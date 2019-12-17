@@ -5,12 +5,15 @@
 }
 
 :root{
+  --acts-cardlist-layout-text-color:red;
   --text-color:#96a2aa;
   --HeaderRoot-bk-color:#d2d7db;
   --ManageFundsRoot-bk-color:#ffffff;
   --ManageFundsRoot-text-color:#96a2aa;
- 
- 
+  --ToolsBarRoot-bk-color:#d2d7db;
+
+
+
   --ActsBox:repeat(auto-fit, minmax(320px, 1fr));
   --Acts-Box-Padding:30px;
 
@@ -19,11 +22,11 @@
   '. gBal .'
   '. gIna gbUp'
   'gDel gAct gAct';
-  --actsGridHeight:28vh;  
+  --actsGridHeight:28vh;
   --actsGridColumns:2fr 4fr 2fr;
   --actsGridRows:4fr auto 4fr 5fr;
 
-  --acts-grid-area-gNF-align:center; 
+  --acts-grid-area-gNF-align:center;
   --acts-grid-area-gDat-align:start;
   --acts-grid-area-gBal-align:center;
   --acts-grid-area-gIna-align:center;
@@ -37,24 +40,30 @@
   --acts-grid-area-gIna-justify:center;
   --acts-grid-area-gbUp-justify:end;
   --acts-grid-area-gDel-justify:start;
-  --acts-grid-area-gAct-justify:center; 
+  --acts-grid-area-gAct-justify:center;
 }
 
 [data-theme="dark"]{
+  --acts-cardlist-layout-text-color:black;
   --text-color:#c7c7c7;
   --HeaderRoot-bk-color:#173855;
   --ManageFundsRoot-bk-color:#173855;
   --ManageFundsRoot-text-color:#96a2aa;
-  
+  --ToolsBarRoot-bk-color:#d2d7db;
+
+}
+
+[data-accounts-layout="list"]
+{
   --ActsBox:repeat(auto-fit, minmax(100%, 1fr));
   --Acts-Box-Padding:10px 30px;
 
-  --actsGrid:'gFN gDat gBal gIna gbUp gDel gAct';  
-  --actsGridHeight:10vh;  
-  --actsGridColumns:1fr 1fr 1fr 1fr 2fr 2fr 1fr;  
+  --actsGrid:'gFN gDat gBal gIna gbUp gDel gAct';
+  --actsGridHeight:10vh;
+  --actsGridColumns:1fr 1fr 1fr 1fr 2fr 2fr 1fr;
   --actsGridRows:1fr;
 
-  --acts-grid-area-gFN-align:end; 
+  --acts-grid-area-gFN-align:end;
   --acts-grid-area-gDat-align:center;
   --acts-grid-area-gBal-align:center;
   --acts-grid-area-gIna-align:center;
@@ -68,8 +77,15 @@
   --acts-grid-area-gIna-justify:center;
   --acts-grid-area-gbUp-justify:center;
   --acts-grid-area-gDel-justify:center;
-  --acts-grid-area-gAct-justify:center;  
+  --acts-grid-area-gAct-justify:center;
 }
+
+.acts_layout
+{
+  color: var(--acts-cardlist-layout-text-color);
+}
+
+
 
 
 
@@ -100,8 +116,8 @@
   'ToolsBarRoot'
   'FundsView';
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-   
-} 
+
+}
 
 
 #HeaderRoot
@@ -165,8 +181,7 @@
   //grid-row: 4;
   grid-column: 2/6;
   padding: 2px 30px;
-  
-  background-color: var(--ManageFundsRoot-bk-color);
+  background-color: var(--ToolsBarRoot-bk-color);
   border-radius: 8px;
   color: var(--primary-color);
   font-size: 24px;
@@ -189,14 +204,22 @@
   height: 100%;
   background-color: var(--ManageFundsRoot-bk-color);
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 100px auto 100px;
   grid-template-rows: 2fr 4fr 2fr;
 }
 .FundsSummaryRoot div{
   grid-column: 1;
 }
 .FundsSummaryRoot div:nth-child(1){
+  grid-row: 3;
+  grid-column:1;
+  justify-self: start;
+  align-self: center;
+
+}
+.FundsSummaryRoot div:nth-child(2){
   grid-row: 1;
+  grid-column:1/4;
   font-size: 34px;
   color: var(--ManageFundsRoot-text-color);
   font-weight: 900;
@@ -205,8 +228,9 @@
 
 }
 
-.FundsSummaryRoot div:nth-child(2){
+.FundsSummaryRoot div:nth-child(3){
   grid-row: 2;
+  grid-column:1/4;
   font-size: 11vw;
   font-weight: 900;
   justify-self: center;
@@ -214,8 +238,9 @@
   min-height: 120px;
   color:var(--ManageFundsRoot-text-color);
 }
-.FundsSummaryRoot div:nth-child(3){
+.FundsSummaryRoot div:nth-child(4){
   grid-row: 3;
+  grid-column:3;
   justify-self: end;
   align-self: center;
 }
@@ -282,13 +307,13 @@
 
   display:grid;
   grid-template-columns:var(--ActsBox);
-  
+
   grid-gap:20px;
 }
 
 .funditems
 {
-  height:var(--actsGridHeight);  
+  height:var(--actsGridHeight);
   border: 4px solid #96a2aa;
   padding:var(--Acts-Box-Padding);
   border-radius: 12px;
@@ -297,9 +322,9 @@
   color: #ebeae7;
   font-weight: 600;
   display: grid;
-  grid-template-areas:var(--actsGrid);  
+  grid-template-areas:var(--actsGrid);
   grid-template-columns:var(--actsGridColumns);
-  grid-template-rows: var(--actsGridRows); 
+  grid-template-rows: var(--actsGridRows);
 
 }
 .fundLName{
@@ -316,7 +341,7 @@
   grid-area:gBal;
   justify-self: var(--acts-grid-area-gBal-justify);
   align-self: var(--acts-grid-area-gBal-align);
-  color: #FFC107;
+  color: #8BC34A;
   font-size:20px;
   font-weight:900;
   letter-spacing: .55px;;
@@ -451,7 +476,7 @@ input[type="checkbox"].checkbox + label {
 
 .MuiFab-primary {
   color: #fff;
-  background-color:#053a58!important;
+  background-color:#3f51b5 !important;
   justify-self: end;
 }
 .MuiFab-primary:hover {
@@ -465,17 +490,17 @@ input[type="checkbox"].checkbox + label {
   #ManageFundsRoot {
     grid-column: 1/7;
     min-height: 39vh;
-    
+
   }
   .Toolbar
   {
     height:32vh;
-    
+
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(100%,1fr));
     grid-template-rows: 5fr 5fr 5fr 5fr 1fr 8fr;
   }
- 
+
   #HeaderRoot
   {
     grid-column: 1/7;

@@ -5,7 +5,7 @@ import {db} from '../store/storeSettings';
 import {getCurrentDate} from '../utility/utilities';
 
 import {Fab} from '@material-ui/core';
-import { IoIosAdd } from 'react-icons/io';
+import { FaSave } from 'react-icons/fa';
 
 const ManageFunds = (props)=>{
     const {dispatch} = useContext(db);
@@ -22,9 +22,9 @@ const ManageFunds = (props)=>{
         <input type="text" name="Iname" onChange={setField}  value={fields.Iname} />
         <div>$ Balance</div>
         <input type="text" name="Ibalance" onChange={setField}  value={fields.Ibalance} />
-        <div>{(isBalanceValid())?"Valid":"Not Valid"}</div>        
+        <div>{(isBalanceValid())?"Valid":"Not Valid"}</div>
         <Fab onClick={Add} color="primary" aria-label="add">
-          <IoIosAdd style={{fontSize:'55px',fontWeight:'900'}} />
+          <FaSave style={{fontSize:'28px',fontWeight:'900'}} />
         </Fab>
       </div>
     );

@@ -4,8 +4,9 @@ const dataTheme = {
   light:''
   ,dark:'dark'
   ,theme:''
-
-  
+  ,acts_list_layout:'list'
+  ,acts_card_layout:'card'
+  ,acts_theme:''
 }
 
 const dataGroceryTodo =
@@ -33,7 +34,7 @@ const SummaryTotals =
 
 const dataCollections = {
   dataTheme:dataTheme
-  ,AvailableFunds:AvailableFunds 
+  ,AvailableFunds:AvailableFunds
   ,dataGroceryTodo:dataGroceryTodo
   ,AvailableFunds_NextId:0
   ,SummaryTotals:SummaryTotals

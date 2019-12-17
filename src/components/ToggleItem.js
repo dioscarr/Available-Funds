@@ -21,14 +21,14 @@ const ToggleItem = (props) =>{
 
     return (
         <div className="toggle-container">
-                    <span style={offOnStyle.off}>off</span>
-                    <span className="toggle">
-                        <input checked={isActive} onChange={()=>{callBack({isActive:!isActive})}}
-                        type="checkbox" className="checkbox" id={`${id}`} />
-                        <label htmlFor={`${id}`} />
-                    </span>
-                    <span style={offOnStyle.on}>on</span>
-                </div>
+            <span style={offOnStyle.off}>off</span>
+            <span className="toggle">
+                <input checked={isActive} onChange={()=>{callBack({isActive:!isActive})}}
+                type="checkbox" className="checkbox" id={`${id}`} />
+                <label htmlFor={`${id}`} />
+            </span>
+            <span style={offOnStyle.on}>on</span>
+        </div>
     );
 }
 export default  ToggleItem;

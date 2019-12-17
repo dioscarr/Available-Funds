@@ -1,4 +1,4 @@
-import React, {useState, useReducer, useContext, useEffect} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
 import ManageFunds from './components/ManageFunds';
 import './App.scss';
 import {db} from './store/storeSettings';
@@ -16,6 +16,8 @@ function App() {
     console.log("render");
     localStorage.setItem('dark', JSON.stringify(darkMode));
     dispatch({type:'THEMEMODE',payload:{mode:darkMode}});
+
+
   },[darkMode]);
 
   useEffect(()=>{
@@ -43,8 +45,8 @@ function App() {
     if(!window.matchMedia)return;
       return window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
- 
-  
+
+
   return (
     <db.Provider value={{state, dispatch}} >
       <div id="todoGridParent" className={darkMode? "Dark-Mode" : "Light-Mode"}>
@@ -80,8 +82,10 @@ function App() {
         <div id="ToolsBarRoot">
           <ToolsBar />
         </div>
-        <div data-theme={state.dataTheme.theme} id="FundsView" className="CollectionOfAvailFunds">
-        <FundsView />
+        <div  data-theme={state.dataTheme.theme}
+              data-accounts-layout={state.dataTheme.acts_theme}
+            id="FundsView" className="CollectionOfAvailFunds">
+          <FundsView />
         </div>
       {/* <div id="item4">
         <GroceryShoppingView />
