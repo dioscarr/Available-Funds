@@ -263,10 +263,22 @@
   letter-spacing:.5px;
   align-self:center;
 }
+
+.btnCloseAddView{
+  justify-self: end;
+
+}
 .Toolbar div:nth-child(1){
   grid-row:1;
 
+
 }
+.Toolbar div:nth-child(4){
+  grid-row:1;
+justify-self:end;
+
+}
+
 .Toolbar input{
   font-size:1em;
   text-align:bottom;
@@ -518,4 +530,8 @@ input[type="checkbox"].checkbox + label {
     grid-column: 1/7;
   }
 
+}
+
+.MuiIconButton-root{
+  width:fit-content;
 }

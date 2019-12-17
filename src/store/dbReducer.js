@@ -1,58 +1,71 @@
-import {sum} from '../utility/utilities';
+import { sum } from '../utility/utilities';
 
-  const dbReducer = (state,action) =>
-  {
-    switch(action.type)
-    {
-      case 'UPDATEACTSTHEME':
-            const selectedTheme = action.payload.theme;
-            state.dataTheme.acts_theme = selectedTheme;
-        return {...state}
-      case 'THEMEMODE':
-        const theme =  (action.payload.mode)?state.dataTheme.dark:state.dataTheme.light;
-        state.dataTheme.theme=theme;
-        return {...state}
-      case 'UPDATETOTALS':
-          Update_CurrentBudget(state);
-          Update_TotalBalance(state);
-        return {...state}
-      case 'ADD':
+const dbReducer = (state, action) => {
+  switch (action.type) {
+    case 'VISIBLE':
+      debugger;
+      let isVisible = state.visible;
+      switch (action.payload.target) {
+        case 'AddView':
+          isVisible.isAddViewVisible = !isVisible.isAddViewVisible;
+          isVisible.isBtnAddViewVisible = !isVisible.isBtnAddViewVisible;
 
-            let new_model = action.payload.model;
-            new_model.id = state.AvailableFunds_NextId;
-            state.AvailableFunds.push(new_model);
+          break;
+        case 'CloseAddView':
+          isVisible.isAddViewVisible = !isVisible.isAddViewVisible;
+          isVisible.isBtnAddViewVisible = !isVisible.isBtnAddViewVisible;
+          break;
+      }
+      return { ...state, visible: isVisible }
+    case 'UPDATEACTSTHEME':
+      const selectedTheme = action.payload.theme;
+      state.dataTheme.acts_theme = selectedTheme;
+      return { ...state }
+    case 'THEMEMODE':
+      const theme = (action.payload.mode) ? state.dataTheme.dark : state.dataTheme.light;
+      state.dataTheme.theme = theme;
+      return { ...state }
+    case 'UPDATETOTALS':
+      Update_CurrentBudget(state);
+      Update_TotalBalance(state);
+      return { ...state }
+    case 'ADD':
 
-            Update_CurrentBudget(state);
-            Update_TotalBalance(state);
+      let new_model = action.payload.model;
+      new_model.id = state.AvailableFunds_NextId;
+      state.AvailableFunds.push(new_model);
 
-            return{...state,AvailableFunds_NextId:new_model.id+1}
-        case 'UPDATE':
+      Update_CurrentBudget(state);
+      Update_TotalBalance(state);
 
-            let updated_model = action.payload;
+      return { ...state, AvailableFunds_NextId: new_model.id + 1 }
+    case 'UPDATE':
 
-            let newAvailableFunds = state.AvailableFunds.filter((item) =>{
-               return item.id !== updated_model.id
-            });
+      let updated_model = action.payload;
 
-            newAvailableFunds.push(updated_model);
-            const newstate = {...state,AvailableFunds:newAvailableFunds};
+      let newAvailableFunds = state.AvailableFunds.filter((item) => {
+        return item.id !== updated_model.id
+      });
 
-            Update_CurrentBudget(newstate);
-            Update_TotalBalance(newstate);
+      newAvailableFunds.push(updated_model);
+      const newstate = { ...state, AvailableFunds: newAvailableFunds };
 
-            return newstate;
-        case 'DELETE':
+      Update_CurrentBudget(newstate);
+      Update_TotalBalance(newstate);
 
-              state.AvailableFunds = state.AvailableFunds.filter(item=>item.id!==action.payload.id);
-              Update_CurrentBudget(state);
-              Update_TotalBalance(state);
+      return newstate;
+    case 'DELETE':
 
-              return {...state}
-      default:
-        return state;
-    }
+      state.AvailableFunds = state.AvailableFunds.filter(item => item.id !== action.payload.id);
+      Update_CurrentBudget(state);
+      Update_TotalBalance(state);
+
+      return { ...state }
+    default:
+      return state;
   }
-  export default dbReducer;
+}
+export default dbReducer;
 
 
 
@@ -60,15 +73,15 @@ import {sum} from '../utility/utilities';
 
 function Update_TotalBalance(state) {
 
-  state.SummaryTotals.TotalBalance = (state.AvailableFunds.filter(item=>{return item.isActive === true}).length>0)
-                                    ?sum(state.AvailableFunds
-                                    .filter(item=>{return item.isActive === true})
-                                    .map(item => parseInt(item.Balance)))
-                                    .toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                    :0;
+  state.SummaryTotals.TotalBalance = (state.AvailableFunds.filter(item => { return item.isActive === true }).length > 0)
+    ? sum(state.AvailableFunds
+      .filter(item => { return item.isActive === true })
+      .map(item => parseInt(item.Balance)))
+      .toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    : 0;
 }
 
-function Update_CurrentBudget (state) {
+function Update_CurrentBudget(state) {
   return state.SummaryTotals.CurrentBudget = sum(state.dataGroceryTodo.map(item => parseFloat(item.Budget)))
     .toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

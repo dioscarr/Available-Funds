@@ -4,9 +4,10 @@ const visible =
 {
   isHeaderVisible: true
   , isSummaryVisible: true
-  , isAddViewVisible: true
-  , isToolBarVisible: true
-  , isAccountView: true
+  , isAddViewVisible: false
+  , isToolBarVisible: false
+  , isAccountView: false
+  , isBtnAddViewVisible: true
 }
 const dataTheme = {
   light: ''

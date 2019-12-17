@@ -7,7 +7,7 @@ import dbReducer from './store/dbReducer';
 import { getInitialMode } from './utility/Locals';
 
 // import components
-import FundsView from './components/FundsView';
+import AccountsView from './components/AccountsView';
 import AddView from './components/AddView';
 import FundsSummary from './components/FundsSummary'
 import ToolsBar from './components/ToolsBar';
@@ -34,7 +34,7 @@ function App() {
         {(state.visible.isSummaryVisible) && (<div data-theme={state.dataTheme.theme} id="FundsSummaryRoot"><FundsSummary /></div>)}
         {(state.visible.isAddViewVisible) && (<div data-theme={state.dataTheme.theme} id="ManageFundsRoot"><AddView /></div>)}
         {(state.visible.isToolBarVisible) && (<div id="ToolsBarRoot"><ToolsBar /></div>)}
-        {(state.visible.isAccountView) && (<div data-theme={state.dataTheme.theme} data-accounts-layout={state.dataTheme.acts_theme} id="FundsView" className="CollectionOfAvailFunds"><FundsView /></div>)}
+        {(state.visible.isAccountView) && (<div data-theme={state.dataTheme.theme} data-accounts-layout={state.dataTheme.acts_theme} id="FundsView" className="CollectionOfAvailFunds"><AccountsView /></div>)}
         {/* <div id="item4">
         <GroceryShoppingView />
       </div> */}
