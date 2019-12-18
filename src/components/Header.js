@@ -27,7 +27,7 @@ const Header = () => {
                     <span>n</span>
                     <span>i</span>
                     <span>e</span>
-                    <span>s</span>
+                    <span>$</span>
                 </span>
             </div>
             <div className="toggle-container">

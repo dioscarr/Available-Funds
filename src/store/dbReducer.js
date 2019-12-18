@@ -5,7 +5,8 @@ const dbReducer = (state, action) => {
     case 'VISIBLE':
       debugger;
       let isVisible = state.visible;
-      switch (action.payload.target) {
+      switch (action.payload.target)
+      {
         case 'AddView':
           isVisible.isAddViewVisible = !isVisible.isAddViewVisible;
           isVisible.isBtnAddViewVisible = !isVisible.isBtnAddViewVisible;
@@ -15,6 +16,11 @@ const dbReducer = (state, action) => {
           isVisible.isAddViewVisible = !isVisible.isAddViewVisible;
           isVisible.isBtnAddViewVisible = !isVisible.isBtnAddViewVisible;
           break;
+          case 'AccountsView':
+            isVisible.isAccountView = !isVisible.isAccountView;
+            break;
+            default:break;
+
       }
       return { ...state, visible: isVisible }
     case 'UPDATEACTSTHEME':

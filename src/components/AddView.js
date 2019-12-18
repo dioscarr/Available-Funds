@@ -16,6 +16,8 @@ const AddView = (props) => {
     let model = { id: 0, Name: fields.Iname, Balance: fields.Ibalance, BalanceDate: getCurrentDate() };
     dispatch({ type: 'ADD', payload: { model: model } });
     setFields({ Iname: '', Ibalance: '' });
+
+
   }
   return (
     <div className="Toolbar">
