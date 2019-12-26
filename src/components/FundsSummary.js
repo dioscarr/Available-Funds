@@ -5,10 +5,10 @@ import { db } from '../store/storeSettings';
 import Moonies from './small/Moonies';
 
 import { Fab } from '@material-ui/core';
-import { FaPiggyBank } from 'react-icons/fa';
+import { FaPiggyBank, FaClipboardList } from 'react-icons/fa';
 import { MdEdit } from 'react-icons/md'
-import {TiShoppingCart} from 'react-icons/ti'
-import {MdRestaurant} from 'react-icons/md'
+import { TiShoppingCart } from 'react-icons/ti'
+//import {MdRestaurant} from 'react-icons/md'
 
 const FundsSummary = () => {
     const { state, dispatch } = useContext(db);
@@ -16,16 +16,16 @@ const FundsSummary = () => {
         <div className="FundsSummaryRoot">
             <div>
                 {(state.visible.isBtnAddViewVisible) && (
-                <Fab onClick={() => dispatch({ type: 'VISIBLE', payload: { target: 'AddView' } })} color="primary" aria-label="add">
+                    <Fab onClick={() => dispatch({ type: 'VISIBLE', payload: { target: 'AddView' } })} color="primary" aria-label="add">
                         <FaPiggyBank style={{ fontSize: '28px', fontWeight: '900' }} />+
                 </Fab>)}
+                {/* {(state.visible.isBtnAddViewVisible) && (
+                    <Fab onClick={() => dispatch({ type: 'VISIBLE', payload: { target: 'AddView' } })} color="primary" aria-label="add">
+                        <TiShoppingCart style={{ fontSize: '28px', fontWeight: '900', marginLeft: '5px' }} />+
+                </Fab>)} */}
                 {(state.visible.isBtnAddViewVisible) && (
-                <Fab onClick={() => dispatch({ type: 'VISIBLE', payload: { target: 'AddView' } })} color="primary" aria-label="add">
-                        <TiShoppingCart style={{ fontSize: '28px', fontWeight: '900' , marginLeft:'5px' }} />+
-                </Fab>)}
-                {(state.visible.isBtnAddViewVisible) && (
-                <Fab onClick={() => dispatch({ type: 'VISIBLE', payload: { target: 'AddView' } })} color="primary" aria-label="add">
-                        <MdRestaurant style={{ fontSize: '28px', fontWeight: '900', marginLeft:'5px'}} />+
+                    <Fab onClick={() => dispatch({ type: 'VISIBLE', payload: { target: 'AddView' } })} color="primary" aria-label="add">
+                        <FaClipboardList style={{ fontSize: '28px', fontWeight: '900', marginLeft: '5px' }} />+
                 </Fab>)}
             </div>
             <div>Summary</div>

@@ -2,11 +2,14 @@ import { sum } from '../utility/utilities';
 
 const dbReducer = (state, action) => {
   switch (action.type) {
+    case 'CATSELECTION':
+      let selections = state.Selections;
+      selections.SelectedCategoryId = action.payload.id;
+      return { ...state, Selections: selections }
     case 'VISIBLE':
-      debugger;
+
       let isVisible = state.visible;
-      switch (action.payload.target)
-      {
+      switch (action.payload.target) {
         case 'AddView':
           isVisible.isAddViewVisible = !isVisible.isAddViewVisible;
           isVisible.isBtnAddViewVisible = !isVisible.isBtnAddViewVisible;
@@ -16,10 +19,10 @@ const dbReducer = (state, action) => {
           isVisible.isAddViewVisible = !isVisible.isAddViewVisible;
           isVisible.isBtnAddViewVisible = !isVisible.isBtnAddViewVisible;
           break;
-          case 'AccountsView':
-            isVisible.isAccountView = !isVisible.isAccountView;
-            break;
-            default:break;
+        case 'AccountsView':
+          isVisible.isAccountView = !isVisible.isAccountView;
+          break;
+        default: break;
 
       }
       return { ...state, visible: isVisible }

@@ -1,8 +1,8 @@
 
 import React, { useContext } from 'react';
-import { useForm } from '../hooks/useForm';
-import { db } from '../store/storeSettings';
-import { getCurrentDate } from '../utility/utilities';
+import { useForm } from '../../hooks/useForm';
+import { db } from '../../store/storeSettings';
+import { getCurrentDate } from '../../utility/utilities';
 
 import { Fab } from '@material-ui/core';
 import { FaSave } from 'react-icons/fa';
@@ -16,8 +16,6 @@ const AddView = (props) => {
     let model = { id: 0, Name: fields.Iname, Balance: fields.Ibalance, BalanceDate: getCurrentDate() };
     dispatch({ type: 'ADD', payload: { model: model } });
     setFields({ Iname: '', Ibalance: '' });
-
-
   }
   return (
     <div className="Toolbar">
@@ -32,7 +30,6 @@ const AddView = (props) => {
       <IconButton aria-label="delete" className="btnCloseAddView" onClick={() => dispatch({ type: "VISIBLE", payload: { target: 'CloseAddView' } })}>
         <Cancel fontSize="large" />
       </IconButton>
-
     </div>
   );
 }

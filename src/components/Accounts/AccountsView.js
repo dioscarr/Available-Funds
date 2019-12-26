@@ -1,6 +1,6 @@
 import React from 'react';
-import FundTemplate from './FundTemplate';
-import { connect } from '../store/storeSettings';
+import Account from './Account';
+import { connect } from '../../store/storeSettings';
 
 const AccountsView = (props) => {
   const funcFundUpdate = (prop) => {
@@ -8,7 +8,7 @@ const AccountsView = (props) => {
     props.DispatchUpdateFund(model);
   }
   return (
-    props.funds.sort((a, b) => (a.id > b.id) ? 1 : -1).map(fundItem => <FundTemplate key={fundItem.id} funditem={fundItem} funcFundUpdate={funcFundUpdate.bind(this)} />)
+    props.funds.sort((a, b) => (a.id > b.id) ? 1 : -1).map(fundItem => <Account key={fundItem.id} funditem={fundItem} funcFundUpdate={funcFundUpdate.bind(this)} />)
   )
 }
 //settings
