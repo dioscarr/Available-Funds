@@ -3,14 +3,14 @@
     display:grid;
     grid-template-columns:repeat(6,1fr);
     grid-gap:10px;
-    
+
 }
 
 #TodoCategory
 {
     display:grid;
     grid-template-columns:4fr 1fr;
-    
+
     height:40px;
     align-items: center;
     justify-items: center;}

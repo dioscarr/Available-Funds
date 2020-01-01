@@ -26,7 +26,6 @@ const useCategoryForm = initial => {
 
 const TodoCategoryView = () => {
     const [fields, setState] = useCategoryForm({ catname: '' })
-    const { } = useState("");
     const { dispatch } = useContext(db);
     return (<div id="TodoCategoryView" className="TodoCategoryView">
         <Fab style={{ gridColumn: '1/8', justifySelf: 'start', fontSize: '33px' }} className="AddCat" onClick={() => dispatch({ type: 'ADDCAT', payload: { categorName: 'wsds' } })} color="primary" aria-label="add">
